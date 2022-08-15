@@ -10,7 +10,7 @@ WORKDIR /go/src/github.com/superseriousbusiness/gotosocial
 RUN swagger generate spec -o /go/src/github.com/superseriousbusiness/gotosocial/swagger.yaml --scan-models
 
 # stage 2: generate the web/assets/dist bundles
-FROM --platform=${BUILDPLATFORM} node:16.15.1-alpine3.15 AS bundler
+FROM --platform=${BUILDPLATFORM} node:16.16.0-alpine3.15 AS bundler
 
 COPY web web
 RUN yarn install --cwd web/source && \
@@ -18,7 +18,7 @@ RUN yarn install --cwd web/source && \
     rm -r web/source
 
 # stage 3: build the executor container
-FROM --platform=${TARGETPLATFORM} alpine:3.15.4 as executor
+FROM --platform=${TARGETPLATFORM} alpine:3.16.2 as executor
 
 # copy the dist binary created by goreleaser or build.sh
 COPY --chown=1000:1000 gotosocial /gotosocial/gotosocial

@@ -1,6 +1,6 @@
 module github.com/superseriousbusiness/gotosocial
 
-go 1.18
+go 1.19
 
 require (
 	codeberg.org/gruf/go-atomics v1.1.0
